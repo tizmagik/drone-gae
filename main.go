@@ -204,6 +204,15 @@ type dummyGAE struct {
 	TemplateVars map[string]interface{} `json:"-"`
 }
 
+// getEnv get key environment variable if exist otherwise return defaultValue
+func getEnv(key, defaultValue string) string {
+	value := os.Getenv(key)
+	if len(value) == 0 {
+		return defaultValue
+	}
+	return value
+}
+
 func configFromEnv(vargs *GAE, workspace *string) error {
 
 	// drone plugin input format du jour:
